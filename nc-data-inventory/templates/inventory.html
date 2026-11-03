@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" data-theme="__THEME__">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+__CSS__
+/* colours taken from the Streamlit theme */
+:root[data-theme]{__THEME_VARS__}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Data inventory · North Carolina NBS hazard scenarios</div>
+  <h1 id="h1">Data availability at the RCCP study sites</h1>
+  <p class="lede">Each project site is matched to its nearest NOAA / USGS water-level gauge, NDBC wave buoy, wind station and USGS stream gauge, and to the nearest output of every model / hindcast. Ratings combine distance with record length, and are capped where an open-ocean source cannot represent waves or levels inside a sound or river.</p>
+</header>
+
+<div class="strip" id="strip"></div>
+
+<section>
+  <div class="mapgrid">
+    <div class="panel mapbox">
+      <div class="toolbar">
+        <span>Colour sites by</span>
+        <span class="seg" id="segcol"><button type="button" data-v="overall" class="on">Observations</button><button type="button" data-v="overall_all">Incl. models</button></span>
+        <span>Stations</span>
+        <span class="seg" id="segst"><button type="button" data-v="key">Serving sites</button><button type="button" data-v="all">All</button></span>
+      </div>
+      <div class="mapwrap">
+        <svg id="map" tabindex="0" role="application" aria-label="Map of North Carolina coast with study sites, monitoring stations and model output points. Arrow keys pan, plus and minus zoom."></svg>
+        <div class="zctl" role="group" aria-label="Map zoom">
+          <button type="button" id="zin" aria-label="Zoom in">+</button>
+          <button type="button" id="zout" aria-label="Zoom out">−</button>
+          <button type="button" id="zreset" aria-label="Show whole coast">⤢</button>
+          <span id="zlevel">1.0×</span>
+        </div>
+        <div class="zhint" id="zhint" hidden>Use Ctrl + scroll (⌘ + scroll on Mac) to zoom. Drag to pan.</div>
+        <div class="stcard" id="stcard" hidden></div>
+      </div>
+      <div class="legend" id="legend"></div>
+    </div>
+    <div class="panel" id="detail"></div>
+  </div>
+</section>
+
+<section>
+  <div><div class="eyebrow">Site × data type</div><h2>Nearest station, distance and record length</h2></div>
+  <div class="panel tblwrap"><table id="matrix"></table></div>
+  <div class="method">
+    <p><b>Rating rules.</b> Good / fair distance limits: water level ≤10 / ≤30 km, waves ≤25 / ≤60 km, wind ≤15 / ≤40 km, river flow ≤15 / ≤40 km. Records under 10 years (under 20 for water level, the minimum for annual-maxima EVA) are capped at fair. Open-ocean waves (NDBC buoys, WIS) and GTSM water levels are capped at fair at sound, estuary and river sites; CORA's ~500 m mesh resolves the sounds and is not capped. River flow is rated only at sites with a riverine or compound-flood hazard; elsewhere it is shown in grey. <b>Overall</b> is the mean of the rated categories (rounded half up); <b>incl. models</b> takes, per category, the better of observation and model. Model ratings describe spatial coverage (distance to the nearest output point / node / cell), not accuracy — check skill in the Validation tab.</p>
+    <p id="srcnote"></p>
+  </div>
+</section>
+
+<section>
+  <div><div class="eyebrow">Record periods</div><h2>Observations and model hindcasts through time</h2></div>
+  <div class="panel tlbox"><div class="legend" id="covlegend"></div><svg id="coverage" role="img" aria-label="Timeline of in-situ observation records and model hindcast periods"></svg></div>
+  <p class="hint">In-situ bar shading counts how many stations of each type report in each year (records treated as continuous between first and last date); hover a year to see the count.</p>
+</section>
+
+<section>
+  <div><div class="eyebrow">Water-level records</div><h2>Water-level gauge records and the sites they serve</h2></div>
+  <div class="panel tlbox"><svg id="timeline" role="img" aria-label="Timeline of water-level gauge records"></svg></div>
+</section>
+</div>
+<script>
+const DATA = __DATA__;
+const LAND = __LAND__;
+__JS__
+</script>
+</body>
+</html>

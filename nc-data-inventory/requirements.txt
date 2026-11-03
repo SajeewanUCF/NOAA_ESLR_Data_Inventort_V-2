@@ -1,0 +1,23 @@
+streamlit>=1.40
+streamlit-folium>=0.20
+folium>=0.17
+pandas>=2.1
+numpy>=1.26
+requests>=2.31
+plotly>=5.20
+# gridded / NetCDF / Zarr access (WIS, CORA, CONUS404, GTSM)
+xarray>=2024.6
+dask>=2024.6
+zarr>=2.18
+fsspec>=2024.6
+s3fs>=2024.6
+netCDF4>=1.7
+h5netcdf>=1.3
+scipy>=1.11
+pyyaml>=6.0
+# source-specific clients
+dataretrieval>=1.1      # USGS Water Data APIs
+cdsapi>=0.7.4           # Copernicus CDS (CoDEC/GTSM)
+intake>=2.0             # NOAA CORA catalog
+intake-xarray>=2.0
+fastparquet>=2024.2     # CORA virtual-zarr references
